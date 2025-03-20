@@ -3,6 +3,7 @@ import useGlobalStore from "@/shared/stores/useGlobalStore";
 import DropDownMultiSelect from "@/shared/widgets/drop-down-multi-select";
 import InputDate from "@/shared/ui/input-date";
 import Button from "@/shared/ui/button";
+import logout from "@/shared/composables/logout";
 
 const globalStore = useGlobalStore();
 
@@ -10,7 +11,7 @@ const { filterDate, filterCategory, filteredProducts, categories } =
   storeToRefs(globalStore);
 
 const handleLogout = () => {
-  globalStore.logout();
+  logout();
 };
 </script>
 
