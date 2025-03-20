@@ -1,9 +1,9 @@
 import userList from "@/shared/api/users.json";
 import type { IUser, IProduct, ICategory } from "@/shared/types";
-import useMatchesStatus from "@/shared/composables/useMatchesStatus";
-import useMatchesDate from "@/shared/composables/useMatchesDate";
-import { useFetchProducts } from "@/shared/composables/useFetchProducts";
-import { useFetchUsers } from "@/shared/composables/useFetchUsers";
+import useMatchesStatus from "@/shared/helpers/useMatchesStatus";
+import useMatchesDate from "@/shared/helpers/useMatchesDate";
+import { useFetchProducts } from "@/shared/helpers/useFetchProducts";
+import { useFetchUsers } from "@/shared/helpers/useFetchUsers";
 
 export default defineStore("global", () => {
   const users = ref<IUser[]>([]);
