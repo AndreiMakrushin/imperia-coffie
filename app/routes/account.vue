@@ -1,9 +1,9 @@
 <template>
-  <ProfilePage />
+  <AccountPage />
 </template>
 
 <script setup lang="ts">
-import ProfilePage from "@/pages/profile";
+import AccountPage from "@/pages/account";
 </script>
 
 <style scoped></style>

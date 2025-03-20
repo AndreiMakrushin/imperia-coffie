@@ -1,12 +1,15 @@
 html {
+  font-size: 16px;
   line-height: 16px;
   font-weight: 500;
 }
 
 body {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 1rem;
 }
 
 @media (max-width: 1920px) and (min-width: 1150px) {
@@ -14,3 +17,4 @@ body {
     font-size: calc(0.39866369710467703rem + 0.5010514571614699vw);
   }
 }
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");

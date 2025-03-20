@@ -1,48 +1,86 @@
-<template>
-  <div>
-    <h1>Вход в систему</h1>
-    <form @submit.prevent="login">
-      <div>
-        <label for="username">Логин:</label>
-        <input id="username" v-model="username" type="text" required />
-      </div>
-      <div>
-        <label for="password">Пароль:</label>
-        <input id="password" v-model="password" type="password" required />
-      </div>
-      <button type="submit">Войти</button>
-    </form>
-    <p v-if="error" class="error">{{ error }}</p>
-  </div>
-</template>
-
 <script setup lang="ts">
+import useGlobalStore from "@/shared/stores/useGlobalStore";
+import Button from "@/shared/ui/button";
+import InputText from "@/shared/ui/input-text";
+import { ref } from "vue";
+
+const globalStore = useGlobalStore();
 const username = ref("");
 const password = ref("");
-const error = ref("");
 
-const login = () => {
-  const users = [
-    { username: "david.jones@creds.com", password: "8u3&s-1uda" },
-    { username: "sam.robertson@creds.com", password: "0k91sa639" },
-    { username: "nic.crew@creds.com", password: "1atr48asf03" },
-  ];
-
-  const user = users.find(
-    (u) => u.username === username.value && u.password === password.value
-  );
-
-  if (user) {
-    localStorage.setItem("authenticated", "true");
-    navigateTo("/profile");
-  } else {
-    error.value = "Введены неверные данные авторизации. Попробуйте ещё раз";
-  }
+const handleLogin = () => {
+  globalStore.login(username.value, password.value);
 };
 </script>
 
-<style>
-.error {
-  color: red;
+<template>
+  <div class="container">
+    <h1>Вход в систему</h1>
+    <form @submit.prevent="handleLogin">
+      <InputText v-model="username" label="Логин" required />
+      <InputText v-model="password" label="Пароль" type="password" required />
+      <Button label="Войти" backgroundColor="#007bff" />
+    </form>
+    <p v-if="globalStore.error" class="error">{{ globalStore.error }}</p>
+  </div>
+</template>
+
+<style lang="less">
+.container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  h1 {
+    font-size: 2rem;
+    color: #333333;
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    text-align: left;
+
+    label {
+      display: block;
+      font-size: 0.9rem;
+      color: #555555;
+      font-weight: 500;
+    }
+
+    input {
+      display: flex;
+      flex-grow: 1;
+      padding: 0.75rem;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      }
+    }
+  }
+
+  .error {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
 }
 </style>
