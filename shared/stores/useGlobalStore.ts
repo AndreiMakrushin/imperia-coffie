@@ -26,24 +26,6 @@ export default defineStore("global", () => {
   };
   loadData();
 
-  const login = (username: string, passphrase: string) => {
-    error.value = null;
-
-    const user = users.value.find((u) => {
-      return (
-        u.credentials.passphrase === passphrase &&
-        u.credentials.username === username
-      );
-    });
-
-    if (user) {
-      localStorage.setItem("authenticated", "true");
-      navigateTo("/account");
-    } else {
-      error.value = "Введены неверные данные авторизации. Попробуйте ещё раз";
-    }
-  };
-
   const categories = computed<ICategory[]>(() => {
     const uniqueCategories = new Set<string>();
     return products.value
@@ -83,7 +65,6 @@ export default defineStore("global", () => {
     filteredProducts,
     categories,
     isLoading,
-    login,
     loadData,
   };
 });

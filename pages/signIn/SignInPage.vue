@@ -3,13 +3,18 @@ import useGlobalStore from "@/shared/stores/useGlobalStore";
 import Button from "@/shared/ui/button";
 import InputText from "@/shared/ui/input-text";
 import { ref } from "vue";
+import { login } from "@/shared/helpers/signIn";
 
 const globalStore = useGlobalStore();
 const username = ref("");
 const password = ref("");
 
 const handleLogin = () => {
-  globalStore.login(username.value, password.value);
+  globalStore.error = null;
+  const error = login(username.value, password.value, globalStore.users);
+  if (error) {
+    globalStore.error = error;
+  }
 };
 </script>
 
